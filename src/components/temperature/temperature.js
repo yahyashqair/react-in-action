@@ -1,5 +1,5 @@
 import {Component} from "react";
-
+import Contexts from "../../Contexts";
 export class Temperature extends Component {
     constructor(props) {
         super(props);
@@ -13,13 +13,14 @@ export class Temperature extends Component {
 
     render() {
         console.log(this)
+        console.log(this.context)
         return (<div><TemperatureReader type={"c"} temp={this.state.temp}
                                         propagate={this.updateTemp}/>
             <TemperatureReader temp={this.state.temp} type={"f"}
                                propagate={this.updateTemp}/></div>)
     }
 }
-
+Temperature.contextType = Contexts.Theme;
 class TemperatureReader extends Component {
 
     constructor(props) {
