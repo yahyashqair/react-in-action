@@ -1,26 +1,18 @@
-import {Component} from "react";
+import {Component, useContext, useState} from "react";
 import Contexts from "../../Contexts";
-export class Temperature extends Component {
-    constructor(props) {
-        super(props);
-        this.updateTemp = this.updateTemp.bind(this);
-        this.state = {temp: 0};
-    }
 
-    updateTemp(updatedTemp) {
-        this.setState({temp: updatedTemp});
-    }
-
-    render() {
-        console.log(this)
-        console.log(this.context)
-        return (<div><TemperatureReader type={"c"} temp={this.state.temp}
-                                        propagate={this.updateTemp}/>
-            <TemperatureReader temp={this.state.temp} type={"f"}
-                               propagate={this.updateTemp}/></div>)
-    }
+export const Temperature = () => {
+    const [temp, setTemp] = useState(0);
+    const theme = useContext(Contexts.Theme);
+    console.log(theme);
+    return (
+        <div>
+            <TemperatureReader type={"c"} temp={temp}
+                               propagate={setTemp}/>
+            <TemperatureReader temp={temp} type={"f"}
+                               propagate={setTemp}/>
+        </div>)
 }
-Temperature.contextType = Contexts.Theme;
 class TemperatureReader extends Component {
 
     constructor(props) {
