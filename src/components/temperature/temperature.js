@@ -32,7 +32,7 @@ class TemperatureReader extends Component {
         if (this.props.type == 'c') {
             this.props.propagate(event.target.value)
         } else {
-            this.props.propagate(event.target.value / 2)
+            this.props.propagate((event.target.value - 32) * 5 / 9)
         }
     }
 
@@ -51,7 +51,7 @@ class TemperatureReader extends Component {
         if (this.props.type == 'c') {
             return temp;
         } else {
-            return parseInt(temp) * 2;
+            return parseFloat(temp) * 9 / 5+ 32;
         }
     }
 }
